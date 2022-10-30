@@ -20,9 +20,9 @@ function ExpensesOverview() {
 	return (
 		<Bottomtabs.Navigator
 			screenOptions={{
-				headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+				headerStyle: { backgroundColor: GlobalStyles.colors.primary700 },
 				headerTintColor: "white",
-				tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+				tabBarStyle: { backgroundColor: GlobalStyles.colors.primary700 },
 				tabBarActiveTintColor: GlobalStyles.colors.accent500,
 			}}
 		>
