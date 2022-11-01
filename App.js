@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import ManageExpense from "./screens/ManageExpense";
 import RecentExpenses from "./screens/RecentExpenses";
 import AllExpenses from "./screens/AllExpenses";
+import IconButton from "./components/UI/IconButton";
 
 import { GlobalStyles } from "./constants/styles";
 
@@ -19,12 +20,22 @@ const Bottomtabs = createBottomTabNavigator();
 function ExpensesOverview() {
 	return (
 		<Bottomtabs.Navigator
-			screenOptions={{
+			screenOptions={({ navigation }) => ({
 				headerStyle: { backgroundColor: GlobalStyles.colors.primary700 },
 				headerTintColor: "white",
 				tabBarStyle: { backgroundColor: GlobalStyles.colors.primary700 },
 				tabBarActiveTintColor: GlobalStyles.colors.accent500,
-			}}
+				headerRight: ({ tintColor }) => (
+					<IconButton
+						icon="add"
+						size={24}
+						color={tintColor}
+						onPress={() => {
+							navigation.navigate("ManageExpense");
+						}}
+					/>
+				),
+			})}
 		>
 			<Bottomtabs.Screen
 				name="RecentExpenses"
@@ -57,7 +68,12 @@ export default function App() {
 		<>
 			<StatusBar style="auto" />
 			<NavigationContainer>
-				<Stack.Navigator>
+				<Stack.Navigator
+					screenOptions={{
+						headerStyle: { backgroundColor: GlobalStyles.colors.primary700 },
+						headerTintColor: "white",
+					}}
+				>
 					{/* the top screen will be loaded first when the app starts */}
 					<Stack.Screen
 						name="ExpensesOverview"
@@ -65,7 +81,13 @@ export default function App() {
 						options={{ headerShown: false }}
 						//this header does not need to be shown
 					/>
-					<Stack.Screen name="ManageExpense" component={ManageExpense} />
+					<Stack.Screen
+						name="ManageExpense"
+						component={ManageExpense}
+						options={{
+							presentation: "modal",
+						}}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</>
